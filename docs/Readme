@@ -1,0 +1,493 @@
+README.md Contents
+
+
+
+1. Project Overview
+•Description: Clear explanation of the Secure Online Notes System as an educational security project
+•Purpose: Demonstrates secure coding practices for an Application Security course
+
+
+2. Technology Stack
+Complete table documenting:
+
+•Frontend: Vanilla JavaScript, HTML5, CSS3
+•Backend: Node.js, Express.js
+•Database: PostgreSQL
+•Authentication: JWT + Bcrypt
+•Encryption: AES-256-CBC
+•Security Middleware: Helmet.js, Express Rate Limit, CORS
+•Deployment: local hosting
+
+
+
+3. Core Features
+Eight key features documented:
+
+•User Registration & Login with secure password handling
+•Role-Based Access Control (Admin/User roles)
+•Secure Session Management with JWT tokens
+•Password Hashing using Bcrypt (12 rounds)
+•AES-256-CBC Encryption for sensitive data
+•Input Validation & Sanitization
+•STRIDE & DREAD Security Modeling
+•Code Scanning tool integration
+
+
+4. Security Implementations
+Detailed explanations of security measures:
+
+•Input Validation: validator.js for email and password validation
+•Output Sanitization: Text-only treatment with DOMPurify capability
+•Password Hashing: Bcrypt with 12 salt rounds
+•Encryption: AES-256-CBC with per-user keys
+•Session Management: JWT with 1-hour expiration
+•Security Headers: Helmet.js with CSP, X-Frame-Options, X-Content-Type-Options
+•CORS & Rate Limiting: 100 requests per 15 minutes per IP
+•Role-Based Authorization: RBAC middleware on protected routes
+
+5. Threat Modeling Documentation
+
+•STRIDE Threat Model: Reference to comprehensive threat analysis
+•DREAD Risk Assessment: Reference to quantitative risk scoring
+•Both documents linked for detailed review
+
+6. Code Scanning Tools
+Table showing integration status of:
+
+•GitHub CodeQL
+•SonarQube
+
+
+7. Project Structure
+Complete directory tree showing:
+
+•Backend controllers, models, routes, middleware, utilities
+•Frontend components (HTML, JavaScript, CSS)
+•Documentation directory with STRIDE, DREAD, and diagrams
+•Scans directory for security reports
+
+8. Getting Started Guide
+Step-by-step installation instructions:
+
+•Prerequisites (Node.js, PostgreSQL, npm)
+•Clone repository
+•Install dependencies
+•Configure environment variables
+•Initialize database
+•Run application
+
+9. User Roles
+Detailed documentation of:
+
+•User Role: Registration, login, CRUD operations on own notes
+
+•Admin Role: User management, account status control, note count visibility
+
+10. Security Best Practices
+
+Seven key principles demonstrated:
+
+•Principle of Least Privilege
+•Defense in Depth
+•Secure by Default
+•Input Validation
+•Encryption at Rest
+•Secure Password Storage
+•Threat Modeling
+
+11. Deployment Instructions
+
+Deployment Guide: Secure Online Notes System (PopUp Note)
+
+## Table of Contents
+1. [Prerequisites](#prerequisites)
+2. [Installing Node.js](#installing-nodejs)
+3. [Installing PostgreSQL](#installing-postgresql)
+4. [Creating the Database](#creating-the-database)
+5. [Project Setup](#project-setup)
+6. [Environment Configuration](#environment-configuration)
+7. [Running the Application](#running-the-application)
+8. [Creating Admin User](#creating-admin-user)
+9. [Troubleshooting](#troubleshooting)
+10. [Security Notes](#security-notes)
+
+---
+
+## Prerequisites
+
+Before you begin, ensure you have:
+- Windows 10/11, macOS, or Linux operating system
+- Administrator/sudo access on your machine
+- Internet connection for downloading software
+- At least 500MB free disk space
+
+---
+
+## Installing Node.js
+
+### Windows
+
+1. Visit https://nodejs.org/
+2. Download the LTS version (recommended)
+3. Run the installer (.msi file)
+4. Follow the installation wizard (accept defaults)
+5. Restart your computer
+
+**Verify installation:**
+Open Command Prompt and run:
+```cmd
+node --version
+npm --version
+```
+
+### macOS
+
+Using Homebrew:
+```bash
+brew install node
+```
+Or download from https://nodejs.org/
+
+### Linux (Ubuntu/Debian)
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+---
+
+## Installing PostgreSQL
+
+### Windows
+
+1. Visit https://www.postgresql.org/download/windows/
+2. Click "Download the installer"
+3. Download PostgreSQL 16 (or latest version)
+4. Run the installer
+5. During installation:
+   - Set installation directory (default is fine)
+   - Select all components
+   - Set data directory (default is fine)
+   - **Create a password for postgres user - REMEMBER THIS!**
+   - Keep default port: 5432
+   - Keep default locale
+6. Complete the installation
+
+### macOS
+
+Using Homebrew:
+```bash
+brew install postgresql@16
+brew services start postgresql@16
+```
+
+### Linux (Ubuntu/Debian)
+
+```bash
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+```
+
+Set password for postgres user:
+```bash
+sudo -u postgres psql
+\password postgres
+```
+
+---
+
+## Creating the Database
+
+### Using pgAdmin (Windows - Graphical Method)
+
+1. Open pgAdmin from Start Menu
+2. Wait for it to load in your browser
+3. Click the arrow next to "Servers"
+4. Click "PostgreSQL 16"
+5. Enter your postgres password
+6. Right-click "Databases"
+7. Select "Create" → "Database..."
+8. Enter database name: `popupnote`
+9. Click "Save"
+
+### Using SQL Shell (Command Line Method)
+
+**Windows:**
+1. Open "SQL Shell (psql)" from Start Menu
+2. Press Enter for server [localhost]
+3. Press Enter for database [postgres]
+4. Press Enter for port [5432]
+5. Press Enter for username [postgres]
+6. Enter your password
+7. Run:
+```sql
+CREATE DATABASE popupnote;
+```
+
+**macOS/Linux:**
+```bash
+createdb popupnote
+```
+
+Or using psql:
+```bash
+psql -U postgres
+CREATE DATABASE popupnote;
+\q
+```
+
+---
+
+## Project Setup
+
+### Step 1: Extract the Project
+
+Extract `popup-note.zip` to your desired location.
+
+Example: `C:\Projects\popup-note`
+
+### Step 2: Open Terminal/Command Prompt
+
+**Windows:**
+- Press `Win + R`
+- Type `cmd`
+- Press Enter
+
+**macOS/Linux:**
+- Open Terminal application
+
+### Step 3: Navigate to Backend Folder
+
+```cmd
+cd C:\Projects\popup-note\backend
+```
+
+(Replace with your actual path)
+
+### Step 4: Install Dependencies
+
+```cmd
+npm install
+```
+
+Wait for installation to complete (1-2 minutes).
+
+---
+
+## Environment Configuration
+
+### Create the .env File
+
+1. Navigate to the `backend` folder
+2. Create a new file named `.env`
+
+**Using Command Prompt (Windows):**
+```cmd
+notepad .env
+```
+
+**Using Terminal (macOS/Linux):**
+```bash
+nano .env
+```
+
+### Add Environment Variables
+
+Paste the following content:
+
+```env
+DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/popupnote
+JWT_SECRET=your-super-secret-jwt-key-change-this
+```
+
+**Important:**
+- Replace `YOUR_PASSWORD` with your PostgreSQL password
+- Replace `your-super-secret-jwt-key-change-this` with a strong random string
+
+Save and close the file.
+
+---
+
+## Running the Application
+
+### Start the Server
+
+From the `backend` folder, run:
+
+```cmd
+node server.js
+```
+
+You should see:
+```
+Server running on port 5000
+Database connected and tables created
+```
+
+### Access the Application
+
+Open your web browser and go to:
+```
+http://localhost:5000
+```
+
+You should see the PopUp Note login page!
+
+### Stopping the Server
+
+Press `Ctrl + C` in the terminal.
+
+---
+
+## Creating Admin User
+
+### Step 1: Register a New Account
+
+1. Open http://localhost:5000
+2. Click "Register"
+3. Enter email and password
+4. Click "Register"
+
+### Step 2: Promote to Admin
+
+Open SQL Shell (psql) or pgAdmin Query Tool:
+
+```sql
+\c popupnote
+UPDATE users SET role = 'admin' WHERE email = 'your-email@example.com';
+```
+
+### Step 3: Verify
+
+```sql
+SELECT email, role FROM users;
+```
+
+Now log in to see the Admin Panel!
+
+---
+
+## Troubleshooting
+
+### "ECONNREFUSED" or Database Connection Error
+
+**Problem:** Cannot connect to PostgreSQL
+
+**Solution:**
+1. Check PostgreSQL is running:
+   - Windows: Open Services (services.msc), find "postgresql-x64-16", ensure it's running
+   - macOS: `brew services list`
+   - Linux: `sudo systemctl status postgresql`
+
+2. Verify credentials in .env file
+3. Check database exists: `\l` in psql
+
+### "Module not found" Error
+
+**Problem:** Missing dependencies
+
+**Solution:**
+```cmd
+cd backend
+npm install
+```
+
+### "EADDRINUSE: Port 5000 already in use"
+
+**Problem:** Another application is using port 5000
+
+**Solution:**
+
+Windows:
+```cmd
+netstat -ano | findstr :5000
+taskkill /PID <PID_NUMBER> /F
+```
+
+macOS/Linux:
+```bash
+lsof -i :5000
+kill -9 <PID>
+```
+
+### "relation users does not exist"
+
+**Problem:** Database tables not created
+
+**Solution:**
+Tables are created automatically on first run. Restart the server:
+```cmd
+node server.js
+```
+
+### Login Issues
+
+**Problem:** Cannot log in after registration
+
+**Solution:**
+1. Clear browser cookies
+2. Check user exists: `SELECT * FROM users;`
+3. Check is_active is true
+
+---
+
+## Security Notes
+
+### For Development Only
+
+This setup is for local development. For production:
+
+1. **Use HTTPS** - Get SSL certificate
+2. **Strong JWT Secret** - Use 256-bit random key
+3. **Environment Variables** - Never commit .env file
+4. **Database Security** - Use strong passwords, limit connections
+5. **Rate Limiting** - Already configured in the app
+6. **CORS** - Configure for your domain only
+
+### .gitignore
+
+Create `.gitignore` in root folder:
+
+```
+.env
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+```
+
+### Password Policy
+
+The application enforces:
+- Minimum 8 characters
+- At least one uppercase letter
+- At least one lowercase letter
+- At least one number
+- At least one special character
+
+---
+
+## Quick Reference Commands
+
+| Task | Command |
+|------|---------|
+| Start server | `node server.js` |
+| Install packages | `npm install` |
+| Connect to database | `psql -U postgres -d popupnote` |
+| View users | `SELECT * FROM users;` |
+| Make admin | `UPDATE users SET role = 'admin' WHERE email = 'email';` |
+| View notes | `SELECT * FROM notes;` |
+
+---
+
+## Support
+
+For issues with:
+- **Application code**: Check the error logs in terminal
+- **Database**: Use pgAdmin or psql to diagnose
+- **Node.js**: Verify installation with `node --version`
+
+

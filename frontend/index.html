@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop Up Note - Secure Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="alert-container"></div>
+
+    <div id="auth-section">
+        <div class="auth-header">
+            <div class="logo-stack">
+                <div class="stacked-note note-1"></div>
+                <div class="stacked-note note-2"></div>
+                <div class="stacked-note note-3"></div>
+                <h1 class="logo-text">PopUp-<span class="highlight">Note</span></h1>
+            </div>
+            <p>Your secure notes, beautifully organized</p>
+        </div>
+        
+        <div class="auth-container">
+            <div id="login-form">
+                <h2>Welcome Back!</h2>
+                <div class="form-group">
+                    <input type="email" id="login-email" placeholder="Email address">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" placeholder="Password">
+                </div>
+                <button id="btn-login" class="btn-primary">Login</button>
+                <p class="auth-switch">Don't have an account? <a href="#" id="btn-show-register">Register</a></p>
+            </div>
+
+            <div id="register-form" class="hidden">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <input type="email" id="reg-email" placeholder="Email address">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="reg-password" placeholder="Password (min 8 characters)">
+                </div>
+                <button id="btn-register" class="btn-primary">Register</button>
+                <p class="auth-switch">Already have an account? <a href="#" id="btn-show-login">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-section" class="hidden">
+        <header class="board-header">
+            <h1>Sticky<span class="highlight">Board</span></h1>
+            <p id="note-count" class="note-count-text"></p>
+            <div class="header-controls">
+                <span id="user-display" class="user-email"></span>
+                <span id="role-badge" class="role-badge"></span>
+                <button id="btn-admin-view" class="btn-nav hidden">Admin Panel</button>
+                <button id="btn-notes-view" class="btn-nav hidden">My Notes</button>
+                <button id="btn-logout" class="btn-logout">Logout</button>
+            </div>
+        </header>
+
+        <div id="notes-view">
+            <div class="notes-container">
+                <div class="sticky-note add-note" id="add-note-card">
+                    <div class="note-clip"></div>
+                    <div class="add-note-content">
+                        <span class="plus-icon">+</span>
+                        <span>Add Note</span>
+                    </div>
+                </div>
+                <div id="notes-list"></div>
+            </div>
+        </div>
+
+        <div id="admin-view" class="hidden">
+            <div class="admin-container">
+                <h2>Admin Dashboard</h2>
+                <p class="admin-subtitle">View and manage registered users (Note contents are encrypted and cannot be viewed)</p>
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-list"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="note-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content sticky-note modal-note">
+            <div class="note-clip"></div>
+            <button class="modal-close">&times;</button>
+            <input type="text" id="modal-title" placeholder="Note title..." class="note-title-input">
+            <textarea id="modal-content" placeholder="Write something..." class="note-content-input"></textarea>
+            <div class="modal-actions">
+                <button id="btn-save-modal" class="btn-save">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

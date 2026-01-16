@@ -1,0 +1,721 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #666;
+    --yellow-note: #ffc;
+    --green-note: #cfc;
+    --blue-note: #ccf;
+    --pink-note: #fcc;
+    --orange-note: #fec;
+    --primary-blue: #4a90d9;
+    --highlight-yellow: #ffd700;
+    --white: #ffffff;
+    --danger: #e74c3c;
+    --success: #2ecc71;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    color: #333;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 400px;
+}
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.alert-danger {
+    background: #fff5f5;
+    border-left: 4px solid var(--danger);
+    color: #721c24;
+}
+
+.alert-success {
+    background: #f0fff4;
+    border-left: 4px solid var(--success);
+    color: #155724;
+}
+
+#auth-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    padding: 20px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-stack {
+    position: relative;
+    display: inline-block;
+    width: 320px;
+    height: 160px;
+    margin-bottom: 15px;
+}
+
+.stacked-note {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+.note-1 {
+    background: var(--pink-note);
+    left: 20px;
+    top: 20px;
+    transform: rotate(-15deg);
+    z-index: 1;
+}
+
+.note-2 {
+    background: var(--green-note);
+    left: 100px;
+    top: 10px;
+    transform: rotate(5deg);
+    z-index: 2;
+}
+
+.note-3 {
+    background: var(--yellow-note);
+    left: 180px;
+    top: 25px;
+    transform: rotate(12deg);
+    z-index: 3;
+}
+
+.logo-text {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-shadow: 2px 2px 0 rgba(255,255,255,0.3);
+    letter-spacing: -1px;
+    z-index: 10;
+    white-space: nowrap;
+    font-family: 'Architects Daughter', cursive;
+    font-style: italic;
+}
+
+.logo-text .highlight {
+    color: #1a1a1a;
+    position: relative;
+    top: 15px;
+}
+
+.auth-header p {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.7);
+}
+
+.auth-container {
+    background: var(--yellow-note);
+    padding: 40px 30px 30px;
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+    position: relative;
+    box-shadow: 
+        0 0 10px rgba(0,0,0,0.3),
+        0 1px 3px rgba(0,0,0,0.2),
+        0 10px 15px rgba(0,0,0,0.1);
+    transform: rotate(-2deg);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.auth-container:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 
+        0 0 20px rgba(0,0,0,0.4),
+        0 10px 30px rgba(0,0,0,0.3);
+}
+
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 24px;
+    background: linear-gradient(to bottom, #888 0%, #aaa 100%);
+    border-radius: 0 0 12px 12px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.logo-container {
+    margin-bottom: 10px;
+    background: transparent;
+}
+
+.logo {
+    max-width: 160px;
+    height: auto;
+    background: transparent;
+    mix-blend-mode: multiply;
+}
+
+.auth-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-family: 'Architects Daughter', cursive;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    background: transparent;
+    font-size: 16px;
+    font-family: 'Architects Daughter', cursive;
+    transition: border-color 0.3s;
+}
+
+.form-group input::placeholder {
+    color: rgba(0,0,0,0.4);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-bottom-color: #333;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background: #444;
+    transform: translateY(-1px);
+}
+
+.auth-switch {
+    margin-top: 15px;
+    color: #555;
+    font-size: 14px;
+    font-family: 'Architects Daughter', cursive;
+}
+
+.auth-switch a {
+    color: #333;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.auth-switch a:hover {
+    color: #000;
+}
+
+.board-header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    position: relative;
+}
+
+.board-header h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--white);
+    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    letter-spacing: -1px;
+    font-family: 'Architects Daughter', cursive;
+    font-style: italic;
+}
+
+.board-header h1 .highlight {
+    color: var(--highlight-yellow);
+    position: relative;
+    top: 8px;
+}
+
+.note-count-text {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 10px;
+}
+
+.header-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-email {
+    color: var(--white);
+    font-size: 14px;
+}
+
+.role-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.role-badge.admin {
+    background: #e74c3c;
+    color: white;
+}
+
+.role-badge.user {
+    background: var(--success);
+    color: white;
+}
+
+.btn-nav {
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.btn-nav:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.btn-logout {
+    padding: 8px 16px;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-logout:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.notes-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    padding-bottom: 100px;
+}
+
+.sticky-note {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    padding: 30px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 
+        0 0 10px rgba(0,0,0,0.3),
+        0 1px 3px rgba(0,0,0,0.2),
+        0 10px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s, z-index 0.1s;
+    cursor: pointer;
+}
+
+.sticky-note:hover {
+    transform: scale(1.1) rotate(0deg) !important;
+    box-shadow: 
+        0 0 20px rgba(0,0,0,0.4),
+        0 10px 30px rgba(0,0,0,0.3);
+    z-index: 50;
+}
+
+.note-clip {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 20px;
+    background: linear-gradient(to bottom, #888 0%, #aaa 100%);
+    border-radius: 0 0 10px 10px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.note-yellow { background-color: var(--yellow-note); }
+.note-green { background-color: var(--green-note); }
+.note-blue { background-color: var(--blue-note); }
+.note-pink { background-color: var(--pink-note); }
+.note-orange { background-color: var(--orange-note); }
+
+.note-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+    word-break: break-word;
+}
+
+.note-content {
+    flex-grow: 1;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #444;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+.note-date {
+    font-size: 11px;
+    color: #888;
+    margin-top: 8px;
+}
+
+.note-delete {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    background: rgba(231, 76, 60, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: var(--danger);
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s, background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sticky-note:hover .note-delete {
+    opacity: 1;
+}
+
+.note-delete:hover {
+    background: var(--danger);
+    color: white;
+}
+
+.add-note {
+    background: rgba(255,255,255,0.15);
+    border: 3px dashed rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-note:hover {
+    background: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.6);
+    transform: scale(1.05) !important;
+}
+
+.add-note .note-clip {
+    display: none;
+}
+
+.add-note-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+}
+
+.plus-icon {
+    font-size: 48px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+#notes-list {
+    display: contents;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    position: relative;
+    width: 340px;
+    height: auto;
+    min-height: 300px;
+    padding: 40px 25px 25px;
+    z-index: 1;
+}
+
+.modal-note {
+    background: var(--yellow-note);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.note-title-input {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.note-title-input:focus {
+    outline: none;
+    border-bottom-color: rgba(0,0,0,0.3);
+}
+
+.note-content-input {
+    width: 100%;
+    height: 150px;
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 16px;
+    color: #444;
+    resize: none;
+}
+
+.note-content-input:focus {
+    outline: none;
+}
+
+.modal-actions {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.btn-save {
+    padding: 10px 25px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-save:hover {
+    background: #444;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.admin-container h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.admin-subtitle {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.users-table {
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.users-table th,
+.users-table td {
+    padding: 16px 20px;
+    text-align: left;
+}
+
+.users-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.users-table td {
+    border-bottom: 1px solid #e9ecef;
+}
+
+.users-table tr:last-child td {
+    border-bottom: none;
+}
+
+.users-table tr:hover td {
+    background: #f8f9fa;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge.active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-badge.disabled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.btn-action {
+    padding: 6px 12px;
+    margin-right: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-toggle {
+    background: #e9ecef;
+    color: #333;
+}
+
+.btn-toggle:hover {
+    background: #dee2e6;
+}
+
+.btn-delete {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.btn-delete:hover {
+    background: #f5c6cb;
+}
+
+@media (max-width: 768px) {
+    .board-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .header-controls {
+        position: static;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+    
+    .sticky-note {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .auth-container {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+}
