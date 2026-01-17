@@ -18,8 +18,13 @@ function validateRegisterInput(data) {
     }
 
     if (!validator.isLength(data.password, { min: 8, max: 30 })) {
-        errors.password = 'Password must be between 8 and 30 characters';
+    errors.password = 'Password must be between 8 and 30 characters';
+} else {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+    if (!passwordRegex.test(data.password)) {
+        errors.password = 'Password must contain at least 1 uppercase, 1 lowercase, 1 number, and 1 special character';
     }
+}
 
     if (validator.isEmpty(data.password)) {
         errors.password = 'Password field is required';
